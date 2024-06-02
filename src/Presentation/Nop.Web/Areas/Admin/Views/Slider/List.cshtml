@@ -1,0 +1,87 @@
+﻿@using Nop.Web.Areas.Admin.Models.Slider
+@model InfoSearchModel
+
+@{
+    //page title
+    ViewBag.PageTitle = T("Admin.Slider.Info").Text;
+    //active menu item (system name)
+    NopHtml.SetActiveMenuItemSystemName("Info");
+
+
+//     string editQueryString = string.Empty;
+//     var showTour = ViewBag.ShowTour ?? false;
+//     if (showTour)
+//     {
+//         editQueryString = "?showtour=true";
+//     }
+   }
+
+@*   @await Html.PartialAsync("_AdminTour") *@
+
+
+<div class="content-header clearfix">
+    <h1 class="float-left">
+        @T("Admin.Slider.Infos")
+    </h1>
+    <div class="float-right">
+        <a asp-action="Create" class="btn btn-primary">
+            <i class="fas fa-plus-square"></i>
+            @T("Admin.Common.AddNew")
+        </a>
+        @await Component.InvokeAsync(typeof(AdminWidgetViewComponent), new { widgetZone = AdminWidgetZones.InfoListButtons, additionalData = Model })
+    </div>
+</div>
+
+
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="form-horizontal">
+            <div class="cards-group">
+                <div class="card card-default">
+                    <div class="card-body">
+                        @await Html.PartialAsync("Table", new DataTablesModel
+                   {
+                       Name = "infos-grid",
+                       PrimaryKeyColumn = nameof(InfoSummaryModel.Id),
+                       UrlRead = new DataUrl("List", "Slider", null),
+                       Length = Model.PageSize,
+                       LengthMenu = Model.AvailablePageSizes,
+
+                       ColumnCollection = new List<ColumnProperty>
+                        {
+                        new ColumnProperty(nameof(InfoSummaryModel.Image))
+                        {
+                        Title = T("Admin.Slider.Infos.Fields.Image").Text,
+                        Width = "100",
+                        Render = new RenderPicture(Url.Content("~/images/sliders/"))
+                        {
+                            Width = 100
+                        }
+                        },
+                        new ColumnProperty(nameof(InfoSummaryModel.ImageUrl))
+                        {
+                        Title = T("Admin.Slider.Infos.Fields.ImageUrl").Text,
+                        Width = "100" 
+                        },
+                        new ColumnProperty(nameof(InfoSummaryModel.AlterText))
+                        {
+                        Title = T("Admin.Slider.Infos.Fields.AlterText").Text,
+                        Width = "100",
+                        ClassName =  NopColumnClassDefaults.CenterAll
+                        },
+                        new ColumnProperty(nameof(InfoSummaryModel.Id))
+                        {
+                        Title = T("Admin.Common.Edit").Text,
+                        Width = "100",
+                        ClassName =  NopColumnClassDefaults.Button,
+                        Render = new RenderButtonEdit(new DataUrl("Edit"))
+                        }
+                        }
+                   })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,48 @@
+﻿@using Nop.Web.Areas.Admin.Models.Extension.HomePageSliderAdmin
+@model HomepageSliderModel
+
+@{
+    //page title
+    ViewBag.PageTitle = T("Admin.Homepage.Block.EditBlockDetails").Text;
+    //active menu item (system name)
+  NopHtml.SetActiveMenuItemSystemName("HomepageSlider");
+}
+<form asp-controller="AdminHomepageSlider" asp-action="Edit" method="post">
+    <div class="content-header clearfix">
+        <h1 class="float-left">
+            @T("Admin.Homepage.Slider.EditSliderDetails") - @Model.HomepageSliderPictureId
+            <small>
+                <i class="fa fa-arrow-circle-left"></i>
+                <a asp-action="List">back to list</a>
+            </small>
+        </h1>
+        <div class="float-right">
+            <button type="submit" name="save" class="btn btn-primary">
+                <i class="far fa-save"></i>
+                @T("Admin.Common.Save")
+            </button>
+            <button type="submit" name="save-continue" class="btn btn-primary">
+                <i class="far fa-save"></i>
+                @T("Admin.Common.SaveContinue")
+            </button>
+            <span id="homepageblock-delete" class="btn btn-danger">
+                <i class="far fa-trash-alt"></i>
+                @T("Admin.Common.Delete")
+            </span>
+        </div>
+    </div>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="form-horizontal">
+                <nop-cards id="aboutus-cards">
+                    <nop-card asp-name="jewelleryservicefaq-info" asp-icon="fas fa-info" asp-title="@T("Admin.Homepage.Block")" asp-hide-block-attribute-name="fasle" asp-hide="false"
+                              asp-advanced="false">
+                        @await Html.PartialAsync("_CreateOrUpdate.Info", Model)
+                    </nop-card>
+                </nop-cards>
+            </div>
+        </div>
+    </section>  
+</form>
+<nop-delete-confirmation asp-model-id="@Model.Id" asp-button-id="homepageblock-delete" /> 

@@ -1,0 +1,53 @@
+﻿@using Nop.Web.Areas.Admin.Models.Extension.HomePageSliderPublicModel
+
+@model HomePageSliderPublicModel
+
+@{
+    var cacheKeyFromModel = Model.homepageSliderLeftImageModels.Select(x => x.Id).ToList();
+    var cacheKeySlider = string.Join("_", cacheKeyFromModel);
+}
+<cache vary-by="@cacheKeySlider">
+    <div class="slider-container">
+        <div class="slider-col">
+            <div class="slider-wrapper">
+                <div class="slider slider1">
+                    @foreach (var item in Model.homepageSliderLeftImageModels)
+                    {
+                        <div>
+                            <div class="image">
+                                <a href="@item.NavigationUrl">
+                                    <img src="@item.ImageUrl" style="width:100%"/>
+                                </a>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</cache>
+
+@* <!-- Load jQuery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>*@
+
+@* <!-- Load Slick Slider script -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>  *@
+
+ <script asp-location="Footer">
+    $(document).ready(function () {
+        console.log("Document ready.");
+        console.log("jQuery version:", $.fn.jquery);
+        $('.slider1').slick({
+            autoplay: true,
+            autoplaySpeed: 2000,
+            dots: true,
+            infinite: true,
+            speed: 500,
+            fade: true
+        });
+    });
+</script> 
+
+
+

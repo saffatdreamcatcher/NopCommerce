@@ -1,0 +1,55 @@
+﻿@using Nop.Web.Areas.Admin.Models.Slider
+@model InfoSummaryModel
+
+
+@*  <div asp-validation-summary="All"></div> 
+ <input asp-for="Id" type="hidden" /> 
+ <input type="hidden" asp-for="Id" name="Id" value="@Model.Id" />  *@
+
+<section class="content">
+    <div class="container-fluid">
+            <div class="form-horizontal">
+                <div class="cards-group">
+                    @*  @await Component.InvokeAsync(typeof(AdminWidgetViewComponent), new { widgetZone = AdminWidgetZones.EmailAccountDetailsTop, additionalData = Model })  *@
+                    <div class="card card-default">
+                        <div class="card-body">
+                            <div class="form-group  advanced-setting row" id="image-area">
+                                <div class="col-md-3">
+                                    <nop-label asp-for="Image" />
+                                </div>
+                                <div class="col-md-9">
+                               @*  <nop-editor asp-for="ImageFile" />
+                                <span asp-validation-for="ImageFile"></span>  *@
+                                 <input type="file" name="ImageFile" asp-for="ImageFile" class="form-control border-0 shadow" multiple />
+                                </div>
+                            </div>
+                            <div class="form-group row" id="imageurl-area">
+                                <div class="col-md-3">
+                                    <nop-label asp-for="ImageUrl" />
+                                </div>
+                                <div class="col-md-9">
+                                     <nop-editor asp-for="ImageUrl" />
+                                    <span asp-validation-for="ImageUrl"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row" id="altertext-area">
+                                <div class="col-md-3">
+                                    <nop-label asp-for="AlterText" />
+                                </div>
+                                <div class="col-md-9">
+                                    <nop-editor asp-for="AlterText" />
+                                    <span asp-validation-for="AlterText"></span>
+                                </div>
+                            </div>
+
+                        
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+        
+   </div>
+</section>

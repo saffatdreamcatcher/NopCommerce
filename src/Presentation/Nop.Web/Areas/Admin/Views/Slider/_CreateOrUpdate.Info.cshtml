@@ -1,0 +1,65 @@
+@using Nop.Web.Areas.Admin.Models.Slider
+@model InfoSummaryModel
+
+<div class="card-body">
+    @* <div class="form-group row">
+        <div class="col-md-3">
+            <nop-override-store-checkbox asp-for="Image" asp-input="Image" asp-store-scope="@Model.Id" />
+            <nop-label asp-for="Id" />
+        </div>
+        <div class="col-md-9">
+            <nop-editor asp-for="Id" />
+            <span asp-validation-for="Id"></span>
+        </div>
+    </div> *@
+    <div class="form-group row">
+        <div class="col-md-3">
+            <nop-label asp-for="Image" />
+        </div>
+        <div class="col-md-9">
+            <nop-editor asp-for="Image" asp-required="true" />
+            <span asp-validation-for="Image"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-3">
+            <nop-label asp-for="ImageUrl" />
+        </div>
+        <div class="col-md-9">
+            <nop-editor asp-for="ImageUrl" />
+            <span asp-validation-for="ImageUrl"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-3">
+            <nop-label asp-for="AlterText" />
+        </div>
+        <div class="col-md-9">
+            <nop-editor asp-for="AlterText" />
+            <span asp-validation-for="AlterText"></span>
+        </div>
+    </div>
+    
+    <div class="form-group row">
+        <div class="col-md-3">
+            <nop-label asp-for="SelectedStoreIds" />
+        </div>
+        <div class="col-md-9">
+            <nop-select asp-for="SelectedStoreIds" asp-items="Model.AvailableStores" asp-multiple="true" />
+            <script>
+                $(function() {
+                    var storesIdsInput = $('#@Html.IdFor(model => model.SelectedStoreIds)').select2({
+                        closeOnSelect: false,
+                        @if (!Model.AvailableStores.Any())
+                        {
+                        <text>
+                        disabled: true,
+                        placeholder: 'No stores available',
+                        </text>
+                        }
+                    });
+                });
+            </script>
+        </div>
+    </div>
+</div>
